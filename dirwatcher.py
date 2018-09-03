@@ -70,51 +70,53 @@ def signal_handler(sig_num, frame):
 
     global exit_flag
     if sig_num == signal.SIGINT:
-        logger.info("I recieved a SIGINT from the os/ program was terminated with ctr-c")
+        logger.info(" SIGINT recieved from the os: program terminated w/ ctr-c")
         exit_flag = True
     elif sig_num == signal.SIGTERM:
-        logger.info("I recieved a SIGTERM from the os/ program was terminated")
+        logger.info(" SIGTERM recieved from the os: program terminated")
         exit_flag = True
 
 
-def create_parser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('dir',
-                        help='Initializes the directory')
-    return parser
+def find_magic_words(d):
+    """Finds all magic words and sends back an list of
+    tuples containing: the word, line it was found, and the file """
 
-
-# Finds all magic words and sends back an array of tuples containing: the word, line it was found, and the file
-def find_magic_word(d):
     files = os.listdir(d)
     found_words = []
     for file in files:
         with open(d + "/" + file) as f:
             content = f.readlines()
             for index, line in enumerate(content):
-                match = re.findall(r"wuddup", line)
+                match = re.findall(r"magic", line)
                 if match:
-                    found_words.append(tuple((index, match, file)))
+                    found_words.append(tuple((match[0], index, file)))
     return found_words
 
 
-# Prints all the magic words to the log 
 def log_magic_words(d, before):
-    after = [w for w in find_magic_word(d)]
-    added = [w for w in after if not w in before]
-    removed = [w for w in before if not w in after]
+    """Prints all the magic words to the log"""
+
+    after = [w for w in find_magic_words(d)]
+    added = [w for w in after if w not in before]
+    removed = [w for w in before if w not in after]
 
     for word_added in added:
         print word_added
-        logger.info(''' Magic word found {} at line {} in file {}'''
-                        .format(word_added[0], word_added[1], word_added[2]))
-            
+        logger.info(''' Magic word "{}" found at line {} in file {}'''
+                    .format(word_added[0], word_added[1], word_added[2]))
 
-# Logs if a file was added or removed
+    for word_added in removed:
+        print word_added
+        logger.info(''' Magic word "{}" is no longer at line {} in file {}'''
+                    .format(word_added[0], word_added[1], word_added[2]))
+
+
 def log_files(d, before):
+    """Logs if a file was added or removed"""
+
     after = [f for f in os.listdir(d)]
-    added = [f for f in after if not f in before]
-    removed = [f for f in before if not f in after]
+    added = [f for f in after if f not in before]
+    removed = [f for f in before if f not in after]
 
     for file_added in added:
         logger.info(''' File added {}'''
@@ -123,33 +125,62 @@ def log_files(d, before):
     for file_removed in removed:
         logger.info(''' File removed {}'''
                     .format(file_removed))
-    return after
+
+
+# Creates parser
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('dir',
+                        help='Initializes the directory')
+    return parser
 
 
 def main(args):
 
+    # Create parser
     parser = create_parser()
 
+    # Exit if there are no arguments
     if not args:
         parser.print_usage()
         sys.exit(1)
 
+    # Parse args
     parsed_args = parser.parse_args(args)
 
     # Hook these two signals from the OS ..
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
+    # Interval for while loop
     some_interval = 2
-    folder_before = [f for f in os.listdir(parsed_args.dir)]
-    words_before = find_magic_word(parsed_args.dir)
-    logger.info(''' Program initialized the these files : {} '''.format(folder_before))
+
+    # Gets lists of all found files and magic words for global variable
+    files_before = [f for f in os.listdir(parsed_args.dir)]
+    words_before = find_magic_words(parsed_args.dir)
+
+    # Prints out initial message of all found files
+    # and magic words when program runs
+    logger.info(''' Program initialized the these files : {} '''
+                .format(files_before))
+    logger.info(''' Program initialized the these found magic words : {} '''
+                .format(words_before))
+
+    # Program runs while there is no exit flag at an interval specified above
     while not exit_flag:
         time.sleep(some_interval)
+
+        # Logs words and files if they are different from last interval
         log_magic_words(parsed_args.dir, words_before)
-        words_before = find_magic_word(parsed_args.dir)
-        folder_after = log_files(parsed_args.dir, folder_before)
-        folder_before = folder_after
+        log_files(parsed_args.dir, files_before)
+
+        # Gets new lists of files and words
+        words_after = find_magic_words(parsed_args.dir)
+        files_after = [f for f in os.listdir(parsed_args.dir)]
+
+        # Sets global variables to new lists to check against
+        words_before = words_after
+        files_before = files_after
 
 
 if __name__ == '__main__':
