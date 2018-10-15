@@ -1,15 +1,4 @@
-2018-09-03 17:09:01,910:dirwatcher.py: Program initialized the these files : ['magic.txt'] 
-2018-09-03 17:09:01,910:dirwatcher.py: Program initialized the these found magic words : [(1, ['magic'], 'magic.txt'), (3, ['magic'], 'magic.txt')] 
-2018-09-03 17:09:15,076:dirwatcher.py:SIGINT recieved from the os: program terminated w/ ctr-c
-2018-09-03 17:13:33,877:dirwatcher.py: Program initialized the these files : ['magic.txt'] 
-2018-09-03 17:13:33,877:dirwatcher.py: Program initialized the these found magic words : [(1, ['magic'], 'magic.txt'), (3, ['magic'], 'magic.txt')] 
-2018-09-03 17:13:43,892:dirwatcher.py: Magic word found 5 at line ['magic'] in file magic.txt
-2018-09-03 17:14:29,213:dirwatcher.py:SIGINT recieved from the os: program terminated w/ ctr-c
-2018-09-03 17:15:04,357:dirwatcher.py: Program initialized the these files : ['magic.txt'] 
-2018-09-03 17:15:04,357:dirwatcher.py: Program initialized the these found magic words : [('magic', 1, 'magic.txt'), ('magic', 3, 'magic.txt'), ('magic', 5, 'magic.txt')] 
-2018-09-03 17:15:20,383:dirwatcher.py: Magic word is no longer at magic at line 5 in file magic.txt
-2018-09-03 17:16:39,602:dirwatcher.py:SIGINT recieved from the os: program terminated w/ ctr-c
-2018-09-03 17:16:41,078:dirwatcher.py: Program initialized the these files : ['magic.txt'] 
-2018-09-03 17:16:41,079:dirwatcher.py: Program initialized the these found magic words : [('magic', 1, 'magic.txt'), ('magic', 3, 'magic.txt')] 
-2018-09-03 17:16:51,093:dirwatcher.py: Magic word "magic" found at line 5 in file magic.txt
-2018-09-03 17:17:03,005:dirwatcher.py:SIGINT recieved from the os: program terminated w/ ctr-c
+dirwatcher.py : 2018-10-15 14:32:48,033 : ERROR : Program started at : [Errno 2] No such file or directory: './tes'  
+dirwatcher.py : 2018-10-15 14:32:48,033 : INFO :  Program started at : 2018-10-15 14:32:48.033816 
+dirwatcher.py : 2018-10-15 14:34:24,010 : ERROR : Error : [Errno 2] No such file or directory: './tes'  
+dirwatcher.py : 2018-10-15 14:34:24,010 : INFO :  Program started at : 2018-10-15 14:34:24.010478 

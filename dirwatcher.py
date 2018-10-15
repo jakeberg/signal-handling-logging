@@ -45,12 +45,16 @@ import signal
 import time
 import argparse
 import re
+from datetime import datetime, timedelta
 exit_flag = False
+start_time = datetime.now()
 
 # Builds custom logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s:%(filename)s:%(message)s')
+formatter = logging.Formatter(
+    '%(filename)s : %(asctime)s : %(levelname)s : %(message)s'
+    )
 file_handler = logging.FileHandler('dirwatcher-log.log')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -70,10 +74,12 @@ def signal_handler(sig_num, frame):
 
     global exit_flag
     if sig_num == signal.SIGINT:
-        logger.info(" SIGINT recieved from the os: program terminated w/ ctr-c")
+        logger.warning(
+            " SIGINT recieved from the os: program terminated w/ ctr-c"
+            )
         exit_flag = True
     elif sig_num == signal.SIGTERM:
-        logger.info(" SIGTERM recieved from the os: program terminated")
+        logger.warning(" SIGTERM recieved from the os: program terminated")
         exit_flag = True
 
 
@@ -152,8 +158,19 @@ def main(args):
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
+    # Exception handling for missing directory
+    try:
+        os.listdir(parsed_args.dir)
+    except Exception as e:
+        logger.error('''Error : {}  '''.format(e))
+
     # Interval for while loop
     some_interval = 2
+
+    # Get server start time
+    start_time = datetime.now()
+    logger.info(''' Program started at : {} '''
+                .format(start_time))
 
     # Gets lists of all found files and magic words for global variable
     files_before = [f for f in os.listdir(parsed_args.dir)]
@@ -181,6 +198,13 @@ def main(args):
         # Sets global variables to new lists to check against
         words_before = words_after
         files_before = files_after
+
+    # Logs uptime after while loop has been broken
+    logger.info(''' Program ended at : {}  '''
+                .format(datetime.now()))
+    uptime = datetime.now() - start_time
+    logger.info(''' Uptime : {} seconds '''
+                .format(uptime.seconds))
 
 
 if __name__ == '__main__':
