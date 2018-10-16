@@ -163,6 +163,7 @@ def main(args):
         os.listdir(parsed_args.dir)
     except Exception as e:
         logger.error('''Error : {}  '''.format(e))
+        sys.exit(1)
 
     # Interval for while loop
     some_interval = 2

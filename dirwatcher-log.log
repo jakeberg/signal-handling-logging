@@ -1,4 +1,20 @@
-dirwatcher.py : 2018-10-15 14:32:48,033 : ERROR : Program started at : [Errno 2] No such file or directory: './tes'  
-dirwatcher.py : 2018-10-15 14:32:48,033 : INFO :  Program started at : 2018-10-15 14:32:48.033816 
-dirwatcher.py : 2018-10-15 14:34:24,010 : ERROR : Error : [Errno 2] No such file or directory: './tes'  
-dirwatcher.py : 2018-10-15 14:34:24,010 : INFO :  Program started at : 2018-10-15 14:34:24.010478 
+dirwatcher.py : 2018-10-16 09:34:46,278 : INFO :  Program started at : 2018-10-16 09:34:46.278042 
+dirwatcher.py : 2018-10-16 09:34:46,284 : INFO :  Program initialized the these files : ['magic.txt'] 
+dirwatcher.py : 2018-10-16 09:34:46,284 : INFO :  Program initialized the these found magic words : [('magic', 1, 'magic.txt'), ('magic', 3, 'magic.txt'), ('magic', 5, 'magic.txt')] 
+dirwatcher.py : 2018-10-16 09:35:20,336 : INFO :  Magic word "magic" is no longer at line 1 in file magic.txt
+dirwatcher.py : 2018-10-16 09:35:20,336 : INFO :  Magic word "magic" is no longer at line 3 in file magic.txt
+dirwatcher.py : 2018-10-16 09:35:20,336 : INFO :  Magic word "magic" is no longer at line 5 in file magic.txt
+dirwatcher.py : 2018-10-16 09:35:20,336 : INFO :  File removed magic.txt
+dirwatcher.py : 2018-10-16 09:35:24,344 : INFO :  Magic word "magic" found at line 1 in file magic.txt
+dirwatcher.py : 2018-10-16 09:35:24,344 : INFO :  Magic word "magic" found at line 3 in file magic.txt
+dirwatcher.py : 2018-10-16 09:35:24,345 : INFO :  Magic word "magic" found at line 5 in file magic.txt
+dirwatcher.py : 2018-10-16 09:35:24,345 : INFO :  File added magic.txt
+dirwatcher.py : 2018-10-16 09:35:45,133 : WARNING :  SIGINT recieved from the os: program terminated w/ ctr-c
+dirwatcher.py : 2018-10-16 09:35:45,133 : INFO :  Program ended at : 2018-10-16 09:35:45.133827  
+dirwatcher.py : 2018-10-16 09:35:45,134 : INFO :  Uptime : 58 seconds 
+dirwatcher.py : 2018-10-16 09:35:55,712 : INFO :  Program started at : 2018-10-16 09:35:55.712192 
+dirwatcher.py : 2018-10-16 09:35:55,712 : INFO :  Program initialized the these files : ['magic.txt'] 
+dirwatcher.py : 2018-10-16 09:35:55,712 : INFO :  Program initialized the these found magic words : [('magic', 1, 'magic.txt'), ('magic', 3, 'magic.txt'), ('magic', 5, 'magic.txt')] 
+dirwatcher.py : 2018-10-16 09:42:18,801 : WARNING :  SIGINT recieved from the os: program terminated w/ ctr-c
+dirwatcher.py : 2018-10-16 09:42:18,802 : INFO :  Program ended at : 2018-10-16 09:42:18.802179  
+dirwatcher.py : 2018-10-16 09:42:18,802 : INFO :  Uptime : 383 seconds 
